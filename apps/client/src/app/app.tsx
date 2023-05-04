@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { OfflineSpeechToText } from "./offlineSpeechToText";
 import { Link, Routes, Route } from "react-router-dom";
+import { SpeechToText } from "./speechToText";
 // import { Route, Routes, Link } from "react-router-dom";
 
 const StyledApp = styled.div`
@@ -16,7 +17,10 @@ export function App() {
       <div role="navigation">
         <ul>
           <li>
-            <Link to="/">Speech to text through server</Link>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/speech-to-text-over-server">Speech to text over server</Link>
           </li>
           <li>
             <Link to="/offline-speech-to-text">Speech to text offline</Link>
@@ -28,8 +32,14 @@ export function App() {
           path="/"
           element={
             <div>
-              WIP
+              Choose
             </div>
+          }
+        />
+        <Route
+          path="/speech-to-text-over-server"
+          element={
+            <SpeechToText />
           }
         />
         <Route
@@ -39,7 +49,6 @@ export function App() {
           }
         />
       </Routes>
-      {/* END: routes */}
     </StyledApp>
   );
 }
