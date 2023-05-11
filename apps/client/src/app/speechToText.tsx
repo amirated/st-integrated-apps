@@ -1,5 +1,34 @@
-import { useEffect, useState } from "react";
+import { useDebugValue, useEffect, useState } from "react";
+import styled from "styled-components";
 import { socket } from "../socket";
+
+const Container = styled.div`
+	border: 2px solid #9fb6d0;
+	padding: 15px;
+	border-radius: 10px;
+`;
+
+const Hr = styled.hr`
+	margin-top: 50px;
+`;
+
+const Button = styled.button`
+	background: #aeedff;
+	margin-right: 5px;
+	padding: 15px;
+	border-radius: 10px;
+`;
+
+const Transcript = styled.div`
+	padding: 20px;
+	margin-bottom: 10px;
+	border-radius: 10px;
+	background: #bbaabb;
+`;
+
+const H2 = styled.h2`
+	color: #6c6464;
+`;
 
 export const SpeechToText = () => {
 	const [isConnected, setIsConnected] = useState(socket.connected);
@@ -124,24 +153,25 @@ export const SpeechToText = () => {
     }
 
 	return (
-		<div>
+		<Container>
 			<audio></audio>
-			<button id="startRecButton" type="button" onClick={startRecording} disabled={recording}> Start recording</button>
-			<button id="stopRecButton" type="button" onClick={stopRecording} disabled={!recording}> Stop recording</button>
+			<Button id="startRecButton" type="button" onClick={startRecording} disabled={recording}> Start recording</Button>
+			<Button id="stopRecButton" type="button" onClick={stopRecording} disabled={!recording}> Stop recording</Button>
 			<div id="recordingStatus">&nbsp;</div>
-			<div>
+			<Transcript>
                 {finalText.length > 0 ? 
 					<span>{finalText}</span> : 
 					<span className="greyText">...</span>
 				}
-            </div>
-			<div className="box">
-                <h2>Notes</h2>
-				<button onClick={handleSaveNote} disabled={!finalText}>Save Note</button>
-                {saveNotes.map((n: string) => {
-                    return <p key={n}>{n}</p>
-                })}
-            </div>
-		</div>
+            </Transcript>
+			<Button onClick={handleSaveNote} disabled={!finalText}>Save Note</Button>
+			<Hr/>
+			<H2>Saved Notes</H2>
+			<Transcript>
+				{saveNotes.map((n: string) => {
+					return <p key={n}>{n}</p>
+				})}
+			</Transcript>
+		</Container>
 	);
 };

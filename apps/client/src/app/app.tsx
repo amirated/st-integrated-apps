@@ -5,28 +5,39 @@ import { Link, Routes, Route } from "react-router-dom";
 import { SpeechToText } from "./speechToText";
 // import { Route, Routes, Link } from "react-router-dom";
 
-const StyledApp = styled.div`
-  // Your style here
+const WebApp = styled.div`
+  font-family: 'Arial';
+`;
+
+const Navigation = styled.div`
+  margin-bottom: 20px;
+`;
+
+const Nav = styled.div`
+  background: #ffcd9a;
+  color: #744141;
+  display: inline-block;
+  padding: 10px;
+  margin-right: 5px;
 `;
 
 export function App() {
   return (
-    <StyledApp>
-      
-      
-      <div role="navigation">
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/speech-to-text-over-server">Speech to text over server</Link>
-          </li>
-          <li>
-            <Link to="/offline-speech-to-text">Speech to text offline</Link>
-          </li>
-        </ul>
-      </div>
+    <WebApp>
+      <Navigation>
+        <div role="navigation">
+          <Link to="/speech-to-text-over-server">
+            <Nav>
+              Speech to text over server
+            </Nav>
+          </Link>
+          <Link to="/offline-speech-to-text">
+            <Nav>
+              Speech to text offline
+            </Nav>
+          </Link>
+        </div>
+      </Navigation>
       <Routes>
         <Route
           path="/"
@@ -49,7 +60,7 @@ export function App() {
           }
         />
       </Routes>
-    </StyledApp>
+    </WebApp>
   );
 }
 
